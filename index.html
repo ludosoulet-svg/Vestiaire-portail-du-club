@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vestiaire — portail du club</title>
+<meta name="description" content="Portail du club : buvette, entraînements, boutique, pronostics et infos pratiques.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #eef2ec;
+    --surface: #ffffff;
+    --surface-alt: #e3e9dd;
+    --ink: #16231a;
+    --ink-soft: #4b5a4e;
+    --ink-faint: #7c8a7e;
+    --pitch: #1f4d36;
+    --pitch-deep: #163a28;
+    --pitch-ink: #eaf1e7;
+    --accent: #b9791f;
+    --accent-ink: #4a3208;
+    --line: #d3dac9;
+    --line-soft: #e4e9dd;
+    --gold: #c98a2b;
+    --silver: #8a95a0;
+    --bronze: #a9713f;
+    --shadow: 0 1px 2px rgba(22,35,26,0.06), 0 8px 24px -12px rgba(22,35,26,0.18);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101b13;
+      --surface: #17251b;
+      --surface-alt: #1e2f22;
+      --ink: #eaf1e7;
+      --ink-soft: #a9bba9;
+      --ink-faint: #728274;
+      --pitch: #24593d;
+      --pitch-deep: #163a28;
+      --pitch-ink: #f4f8f1;
+      --accent: #e0a63c;
+      --accent-ink: #241701;
+      --line: #2a3b2e;
+      --line-soft: #22321f;
+      --gold: #e0a63c;
+      --silver: #9aa5ae;
+      --bronze: #c08657;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -12px rgba(0,0,0,0.55);
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #101b13;
+    --surface: #17251b;
+    --surface-alt: #1e2f22;
+    --ink: #eaf1e7;
+    --ink-soft: #a9bba9;
+    --ink-faint: #728274;
+    --pitch: #24593d;
+    --pitch-deep: #163a28;
+    --pitch-ink: #f4f8f1;
+    --accent: #e0a63c;
+    --accent-ink: #241701;
+    --line: #2a3b2e;
+    --line-soft: #22321f;
+    --gold: #e0a63c;
+    --silver: #9aa5ae;
+    --bronze: #c08657;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -12px rgba(0,0,0,0.55);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Karla', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Bebas Neue', 'Karla', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  a { color: inherit; }
+
+  button { font-family: inherit; }
+
+  /* ---------- Header ---------- */
+
+  .scoreboard {
+    background: linear-gradient(180deg, var(--pitch) 0%, var(--pitch-deep) 100%);
+    color: var(--pitch-ink);
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .scoreboard-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .crest { flex: none; width: 46px; height: 46px; }
+
+  .club-name {
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: 0.03em;
+  }
+
+  .club-tag {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: color-mix(in srgb, var(--pitch-ink) 72%, transparent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .header-flex { flex: 1; min-width: 0; }
+
+  /* ---------- Quick nav pills ---------- */
+
+  .pillbar {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 14px 24px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pill {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+
+  .pill:hover { border-color: var(--accent); color: var(--ink); }
+
+  .pill[aria-current="true"] {
+    background: var(--pitch);
+    border-color: var(--pitch);
+    color: var(--pitch-ink);
+  }
+
+  .pill:focus-visible, .tile:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Shell ---------- */
+
+  main {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
+
+  [hidden] { display: none !important; }
+
+  /* ---------- Home tiles ---------- */
+
+  .intro { margin: 4px 0 26px; max-width: 62ch; }
+  .intro p { color: var(--ink-soft); font-size: 16px; line-height: 1.55; margin: 6px 0 0; }
+  .intro h2 { font-size: clamp(26px, 3.4vw, 34px); }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+
+  .tile {
+    position: relative;
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 20px 20px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tile::before {
+    content: "";
+    position: absolute;
+    top: -6px; left: 18px;
+    width: 26px; height: 12px;
+    background: var(--gold);
+    border-radius: 2px;
+    box-shadow: var(--shadow);
+  }
+
+  .tile:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+  .tile-icon {
+    width: 30px; height: 30px;
+    color: var(--pitch);
+  }
+
+  .tile-title { font-size: 24px; }
+  .tile-desc { color: var(--ink-soft); font-size: 14px; line-height: 1.5; margin: 0; }
+  .tile-go {
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  /* ---------- Section shell ---------- */
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+  }
+
+  .section-head h2 { font-size: clamp(30px, 4vw, 42px); }
+
+  .back-link {
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 4px;
+  }
+  .back-link:hover { color: var(--ink); }
+  .back-link svg { width: 14px; height: 14px; }
+
+  .lede { color: var(--ink-soft); max-width: 60ch; line-height: 1.55; margin: 0 0 26px; }
+
+  /* ---------- Buvette ---------- */
+
+  .price-groups { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .price-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+  .price-card h3 { padding: 14px 18px; background: var(--surface-alt); font-size: 20px; border-bottom: 1px solid var(--line); }
+  .price-list { list-style: none; margin: 0; padding: 6px 0; }
+  .price-list li {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 10px 18px;
+    font-size: 14.5px;
+    border-bottom: 1px dashed var(--line-soft);
+  }
+  .price-list li:last-child { border-bottom: none; }
+  .price-list .name { color: var(--ink); }
+  .price-list .note { display: block; font-size: 12px; color: var(--ink-faint); margin-top: 1px; }
+  .price-list .amount { color: var(--accent-ink); background: color-mix(in srgb, var(--gold) 16%, transparent); border-radius: 5px; padding: 1px 7px; font-weight: 600; white-space: nowrap; }
+
+  .buvette-note {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--ink-faint);
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 12px;
+  }
+
+  /* ---------- Entrainements ---------- */
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--surface); }
+  thead th {
+    text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-soft); background: var(--surface-alt);
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+  }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--line-soft); font-size: 14.5px; vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  .grp {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.03em;
+    padding: 2px 9px; border-radius: 999px; background: var(--surface-alt); color: var(--ink-soft);
+  }
+  .grp.seniors { background: color-mix(in srgb, var(--pitch) 16%, transparent); color: var(--pitch); }
+  :root[data-theme="dark"] .grp.seniors { color: var(--pitch-ink); }
+
+  /* ---------- Boutique ---------- */
+
+  .shop-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .product {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column;
+  }
+  .product-swatch {
+    height: 92px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .product-swatch svg { width: 40px; height: 40px; color: var(--pitch-ink); opacity: 0.92; }
+  .product-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .product h3 { font-family: 'Karla', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0; }
+  .product .desc { font-size: 12.5px; color: var(--ink-faint); margin: 0; line-height: 1.4; flex: 1; }
+  .product-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+  .product .price { font-size: 15px; font-weight: 600; color: var(--accent-ink); }
+  .product .buy {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--pitch-ink); background: var(--pitch); border: none; border-radius: 6px;
+    padding: 7px 12px; cursor: pointer;
+  }
+
+  /* ---------- Pronostics ---------- */
+
+  .pronos-layout { display: grid; gap: 22px; grid-template-columns: 1.1fr 1fr; align-items: start; }
+  @media (max-width: 720px) { .pronos-layout { grid-template-columns: 1fr; } }
+
+  .cta-card {
+    background: linear-gradient(155deg, var(--pitch) 0%, var(--pitch-deep) 100%);
+    color: var(--pitch-ink);
+    border-radius: 12px;
+    padding: 26px 24px;
+    box-shadow: var(--shadow);
+  }
+  .cta-card h3 { font-size: 26px; margin-bottom: 8px; }
+  .cta-card p { color: color-mix(in srgb, var(--pitch-ink) 82%, transparent); font-size: 14px; line-height: 1.55; margin: 0 0 18px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold); color: var(--accent-ink);
+    font-weight: 700; font-size: 14px; text-decoration: none;
+    padding: 11px 18px; border-radius: 8px;
+  }
+  .cta-btn svg { width: 16px; height: 16px; }
+  .cta-hint { margin-top: 14px; font-size: 12px; color: color-mix(in srgb, var(--pitch-ink) 65%, transparent); }
+
+  .rank-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+  .rank-card h3 { padding: 14px 18px; background: var(--surface-alt); border-bottom: 1px solid var(--line); font-size: 18px; font-family: 'Karla'; font-weight: 700; letter-spacing: 0; }
+  .rank-list { list-style: none; margin: 0; padding: 4px 0; }
+  .rank-list li { display: flex; align-items: center; gap: 12px; padding: 9px 18px; font-size: 14px; border-bottom: 1px dashed var(--line-soft); }
+  .rank-list li:last-child { border-bottom: none; }
+  .rank-pos {
+    width: 22px; height: 22px; border-radius: 50%; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; background: var(--surface-alt); color: var(--ink-soft);
+  }
+  .rank-pos.p1 { background: var(--gold); color: var(--accent-ink); }
+  .rank-pos.p2 { background: var(--silver); color: #1a1a1a; }
+  .rank-pos.p3 { background: var(--bronze); color: #2a1503; }
+  .rank-name { flex: 1; }
+  .rank-pts { color: var(--ink-faint); }
+
+  /* ---------- Contact ---------- */
+
+  .contact-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 22px; }
+  .info-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; box-shadow: var(--shadow); display: flex; gap: 12px; }
+  .info-card svg { width: 20px; height: 20px; color: var(--pitch); flex: none; margin-top: 2px; }
+  :root[data-theme="dark"] .info-card svg { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .info-card svg { color: var(--accent); } }
+  .info-card h3 { font-family: 'Karla'; font-weight: 700; font-size: 14px; letter-spacing: 0; margin-bottom: 4px; }
+  .info-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+
+  .bureau-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .bureau-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
+  .bureau-list .role { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 2px; }
+
+  footer {
+    text-align: center; padding: 22px 24px 40px; color: var(--ink-faint); font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="scoreboard">
+  <div class="scoreboard-inner">
+    <svg class="crest" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M24 2 L44 9 V26 C44 39 35.5 47.5 24 52 C12.5 47.5 4 39 4 26 V9 Z" fill="var(--gold)"/>
+      <path d="M24 6 L40 12 V26 C40 37 33 44 24 48 C15 44 8 37 8 26 V12 Z" fill="var(--pitch-deep)"/>
+      <path d="M24 15 L30 27 L24 39 L18 27 Z" fill="var(--gold)"/>
+    </svg>
+    <div class="header-flex">
+      <h1 class="club-name" id="club-name">Vestiaire &mdash; AS Verchamps</h1>
+      <p class="club-tag">Espace du club &middot; toutes les infos au m&ecirc;me endroit</p>
+    </div>
+  </div>
+  <nav class="pillbar" id="pillbar" aria-label="Navigation rapide">
+    <button class="pill" data-nav="home" aria-current="true">Accueil</button>
+    <button class="pill" data-nav="buvette">Buvette</button>
+    <button class="pill" data-nav="entrainements">Entra&icirc;nements</button>
+    <button class="pill" data-nav="boutique">Boutique</button>
+    <button class="pill" data-nav="pronostics">Pronostics</button>
+    <button class="pill" data-nav="contact">Infos pratiques</button>
+  </nav>
+</div>
+
+<main>
+
+  <!-- HOME -->
+  <section class="view" id="view-home">
+    <div class="intro">
+      <h2>Bienvenue au club</h2>
+      <p>Un seul endroit pour retrouver les prix de la buvette, le planning des entra&icirc;nements, la boutique, le concours de pronostics et les infos pratiques du club. Choisis une rubrique ci-dessous.</p>
+    </div>
+    <div class="tiles">
+
+      <button class="tile" data-nav="buvette">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 3h11l-1 12a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4L5 3Z"/><path d="M16 6h2.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 19h6"/></svg>
+        <div class="tile-title">Buvette</div>
+        <p class="tile-desc">Boissons, snacks et petite restauration &mdash; tous les tarifs du club-house.</p>
+        <span class="tile-go">Voir les prix &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="entrainements">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="2"/><path d="M3.5 9.5h17"/><path d="M8 3v3M16 3v3"/><path d="M8 14l2.5 2.5L16 11"/></svg>
+        <div class="tile-title">Entra&icirc;nements</div>
+        <p class="tile-desc">Planning hebdomadaire par cat&eacute;gorie, horaires et lieux.</p>
+        <span class="tile-go">Voir le planning &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="boutique">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 4 6 7v13h12V7l-2-3"/><path d="M8 4a4 4 0 0 0 8 0"/></svg>
+        <div class="tile-title">Boutique</div>
+        <p class="tile-desc">Maillots, textile et accessoires floqu&eacute;s aux couleurs du club.</p>
+        <span class="tile-go">Voir la boutique &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="pronostics">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="3.5" width="16" height="17" rx="2"/><path d="M8 8h.01M12 8h.01M16 8h.01M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01"/></svg>
+        <div class="tile-title">Pronostics</div>
+        <p class="tile-desc">Concours de pronostics entre licenci&eacute;s &mdash; classement et lien vers le site.</p>
+        <span class="tile-go">Jouer &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="contact">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div class="tile-title">Infos pratiques</div>
+        <p class="tile-desc">Adresse, contacts du bureau, horaires du club-house.</p>
+        <span class="tile-go">Voir les infos &rarr;</span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- BUVETTE -->
+  <section class="view" id="view-buvette" hidden>
+    <div class="section-head">
+      <h2>Buvette</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Tarifs du club-house, tenu par les b&eacute;n&eacute;voles les soirs d&rsquo;entra&icirc;nement et les jours de match. Prix &agrave; adapter avec le bureau.</p>
+
+    <div class="price-groups">
+      <div class="price-card">
+        <h3>Boissons</h3>
+        <ul class="price-list">
+          <li><span class="name">Eau / soda<span class="note">33 cl</span></span><span class="amount mono">1,50 &euro;</span></li>
+          <li><span class="name">Caf&eacute; / th&eacute;</span><span class="amount mono">1,00 &euro;</span></li>
+          <li><span class="name">Bi&egrave;re pression<span class="note">25 cl</span></span><span class="amount mono">2,50 &euro;</span></li>
+          <li><span class="name">Bi&egrave;re sans alcool</span><span class="amount mono">2,00 &euro;</span></li>
+          <li><span class="name">Vin chaud<span class="note">hiver, gobelet</span></span><span class="amount mono">2,50 &euro;</span></li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3>&Agrave; grignoter</h3>
+        <ul class="price-list">
+          <li><span class="name">Sandwich merguez</span><span class="amount mono">4,00 &euro;</span></li>
+          <li><span class="name">Panini</span><span class="amount mono">3,50 &euro;</span></li>
+          <li><span class="name">Frites<span class="note">barquette</span></span><span class="amount mono">2,50 &euro;</span></li>
+          <li><span class="name">Chips</span><span class="amount mono">1,00 &euro;</span></li>
+          <li><span class="name">Barre chocolat&eacute;e</span><span class="amount mono">1,00 &euro;</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="buvette-note">Tenue par les parents b&eacute;n&eacute;voles &mdash; le planning de permanence est affich&eacute; au club-house. Contact buvette&nbsp;: buvette@club-exemple.fr</p>
+  </section>
+
+  <!-- ENTRAINEMENTS -->
+  <section class="view" id="view-entrainements" hidden>
+    <div class="section-head">
+      <h2>Entra&icirc;nements</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Planning hebdomadaire hors vacances scolaires. En cas d&rsquo;intemp&eacute;ries, l&rsquo;annulation est annonc&eacute;e sur le groupe de discussion de chaque cat&eacute;gorie.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Cat&eacute;gorie</th><th>Jour</th><th>Horaire</th><th>Lieu</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="grp">U9 / U11</span></td><td>Mardi</td><td class="mono">17h30 &ndash; 18h45</td><td>Stade Municipal &mdash; terrain B</td></tr>
+          <tr><td><span class="grp">U9 / U11</span></td><td>Vendredi</td><td class="mono">17h30 &ndash; 18h45</td><td>Stade Municipal &mdash; terrain B</td></tr>
+          <tr><td><span class="grp">U13 / U15</span></td><td>Mardi</td><td class="mono">18h00 &ndash; 19h30</td><td>Stade Municipal &mdash; terrain A</td></tr>
+          <tr><td><span class="grp">U13 / U15</span></td><td>Jeudi</td><td class="mono">18h00 &ndash; 19h30</td><td>Stade Municipal &mdash; terrain A</td></tr>
+          <tr><td><span class="grp seniors">Seniors</span></td><td>Mardi</td><td class="mono">19h30 &ndash; 21h00</td><td>Stade Municipal &mdash; terrain A</td></tr>
+          <tr><td><span class="grp seniors">Seniors</span></td><td>Jeudi</td><td class="mono">19h30 &ndash; 21h00</td><td>Stade Municipal &mdash; terrain A</td></tr>
+          <tr><td><span class="grp">Loisir</span></td><td>Mercredi</td><td class="mono">20h00 &ndash; 21h15</td><td>Gymnase Jean-Moulin</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BOUTIQUE -->
+  <section class="view" id="view-boutique" hidden>
+    <div class="section-head">
+      <h2>Boutique</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Articles disponibles au club-house ou sur commande aupr&egrave;s du bureau. Floquage nom / num&eacute;ro possible en option.</p>
+
+    <div class="shop-grid">
+      <div class="product">
+        <div class="product-swatch" style="background:var(--pitch)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4 6 7v13h12V7l-2-3"/><path d="M8 4a4 4 0 0 0 8 0"/></svg>
+        </div>
+        <div class="product-body">
+          <h3>Maillot domicile</h3>
+          <p class="desc">Vert &amp; or, floquage disponible.</p>
+          <div class="product-foot"><span class="price mono">38 &euro;</span><button class="buy">Voir</button></div>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product-swatch" style="background:var(--accent)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4 6 7v13h12V7l-2-3"/><path d="M8 4a4 4 0 0 0 8 0"/></svg>
+        </div>
+        <div class="product-body">
+          <h3>Maillot ext&eacute;rieur</h3>
+          <p class="desc">Version blanche, tailles enfant &agrave; adulte.</p>
+          <div class="product-foot"><span class="price mono">38 &euro;</span><button class="buy">Voir</button></div>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product-swatch" style="background:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4h12l2 4-3 2v10H7V10L4 8Z"/></svg>
+        </div>
+        <div class="product-body">
+          <h3>Surv&ecirc;tement</h3>
+          <p class="desc">Veste + pantalon, tissu respirant.</p>
+          <div class="product-foot"><span class="price mono">55 &euro;</span><button class="buy">Voir</button></div>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product-swatch" style="background:var(--pitch-deep)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg>
+        </div>
+        <div class="product-body">
+          <h3>Bonnet club</h3>
+          <p class="desc">Laine, logo brod&eacute;.</p>
+          <div class="product-foot"><span class="price mono">12 &euro;</span><button class="buy">Voir</button></div>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product-swatch" style="background:var(--bronze)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 18h16M4 6l3 12M20 6l-3 12"/></svg>
+        </div>
+        <div class="product-body">
+          <h3>&Eacute;charpe</h3>
+          <p class="desc">Aux couleurs du club, id&eacute;ale les jours de match.</p>
+          <div class="product-foot"><span class="price mono">10 &euro;</span><button class="buy">Voir</button></div>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product-swatch" style="background:var(--silver)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8c2-1.5 4-2 8-2s6 .5 8 2v9c-2 1.5-4 2-8 2s-6-.5-8-2Z"/></svg>
+        </div>
+        <div class="product-body">
+          <h3>Sac de sport</h3>
+          <p class="desc">Compartiment chaussures, logo club.</p>
+          <div class="product-foot"><span class="price mono">25 &euro;</span><button class="buy">Voir</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRONOSTICS -->
+  <section class="view" id="view-pronostics" hidden>
+    <div class="section-head">
+      <h2>Pronostics</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Le concours de pronostics r&eacute;unit les licenci&eacute;s autour des matchs de l&rsquo;&eacute;quipe premi&egrave;re. Un score exact rapporte 3 points, un bon r&eacute;sultat 1 point.</p>
+
+    <div class="pronos-layout">
+      <div class="cta-card">
+        <h3>Rejoindre le concours</h3>
+        <p>Les pronostics se font sur le site d&eacute;di&eacute;, avant chaque coup d&rsquo;envoi. Inscription libre pour tous les licenci&eacute;s du club.</p>
+        <a class="cta-btn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M8 5H5v14h14v-3"/></svg>
+          Ouvrir le site de pronostics
+        </a>
+        <p class="cta-hint">Lien &agrave; remplacer par l&rsquo;adresse r&eacute;elle du site de pronostics du club.</p>
+      </div>
+
+      <div class="rank-card">
+        <h3>Classement</h3>
+        <ul class="rank-list">
+          <li><span class="rank-pos p1">1</span><span class="rank-name">Camille R.</span><span class="rank-pts mono">42 pts</span></li>
+          <li><span class="rank-pos p2">2</span><span class="rank-name">Yanis B.</span><span class="rank-pts mono">39 pts</span></li>
+          <li><span class="rank-pos p3">3</span><span class="rank-name">Sofia M.</span><span class="rank-pts mono">37 pts</span></li>
+          <li><span class="rank-pos">4</span><span class="rank-name">Th&eacute;o L.</span><span class="rank-pts mono">31 pts</span></li>
+          <li><span class="rank-pos">5</span><span class="rank-name">In&egrave;s D.</span><span class="rank-pts mono">28 pts</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="view" id="view-contact" hidden>
+    <div class="section-head">
+      <h2>Infos pratiques</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Coordonn&eacute;es du club et du bureau. &Agrave; jour au d&eacute;but de saison, &agrave; v&eacute;rifier aupr&egrave;s du secr&eacute;tariat.</p>
+
+    <div class="contact-grid">
+      <div class="info-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Adresse</h3><p>Stade Municipal<br>12 rue des Sports, 00000 Verchamps</p></div>
+      </div>
+      <div class="info-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.6 22 2 14.4 2 7a2 2 0 0 1 2-2Z"/></svg>
+        <div><h3>T&eacute;l&eacute;phone</h3><p>06 00 00 00 00<br><span style="color:var(--ink-faint)">Secr&eacute;tariat, aux heures de bureau</span></p></div>
+      </div>
+      <div class="info-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg>
+        <div><h3>E-mail</h3><p>contact@club-exemple.fr</p></div>
+      </div>
+      <div class="info-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div><h3>Club-house ouvert</h3><p>Mar / jeu 17h&ndash;21h &middot; sam 9h&ndash;18h</p></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Karla'; font-weight:700; font-size:15px; letter-spacing:0; margin-bottom:12px;">Le bureau</h3>
+    <ul class="bureau-list">
+      <li><span class="role">Pr&eacute;sident</span>Marc Dubreuil</li>
+      <li><span class="role">Tr&eacute;sori&egrave;re</span>Nadia Ferreira</li>
+      <li><span class="role">Secr&eacute;taire</span>Julien Costa</li>
+      <li><span class="role">Responsable &eacute;cole de foot</span>Aïcha Benali</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>Vestiaire &mdash; contenu d&rsquo;exemple &agrave; remplacer par les informations r&eacute;elles du club.</footer>
+
+<script>
+  (function () {
+    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'contact'];
+
+    function show(name) {
+      if (views.indexOf(name) === -1) name = 'home';
+      views.forEach(function (v) {
+        var el = document.getElementById('view-' + v);
+        if (el) el.hidden = (v !== name);
+      });
+      document.querySelectorAll('.pill').forEach(function (p) {
+        p.setAttribute('aria-current', p.dataset.nav === name ? 'true' : 'false');
+      });
+      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+      try { localStorage.setItem('vestiaire-last-view', name); } catch (e) {}
+    }
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('[data-nav]');
+      if (!trigger) return;
+      show(trigger.dataset.nav);
+    });
+
+    var initial = 'home';
+    try {
+      var saved = localStorage.getItem('vestiaire-last-view');
+      if (saved && views.indexOf(saved) !== -1) initial = saved;
+    } catch (e) {}
+    show(initial);
+  })();
+</script>
+</body>
+</html>
