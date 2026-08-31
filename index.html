@@ -580,12 +580,8 @@
 
       <div class="rank-card">
         <h3>Classement</h3>
-        <ul class="rank-list">
-          <li><span class="rank-pos p1">1</span><span class="rank-name">Camille R.</span><span class="rank-pts mono">42 pts</span></li>
-          <li><span class="rank-pos p2">2</span><span class="rank-name">Yanis B.</span><span class="rank-pts mono">39 pts</span></li>
-          <li><span class="rank-pos p3">3</span><span class="rank-name">Sofia M.</span><span class="rank-pts mono">37 pts</span></li>
-          <li><span class="rank-pos">4</span><span class="rank-name">Th&eacute;o L.</span><span class="rank-pts mono">31 pts</span></li>
-          <li><span class="rank-pos">5</span><span class="rank-name">In&egrave;s D.</span><span class="rank-pts mono">28 pts</span></li>
+        <ul class="rank-list" id="rank-list">
+          <li><span class="rank-name">Chargement du classement&hellip;</span></li>
         </ul>
       </div>
     </div>
@@ -662,6 +658,87 @@
     show(initial);
   })();
 </script>
-<!-- test push automatique OK - 2026-08-31 -->
+
+<script>
+  (function () {
+    var SUPABASE_URL = 'https://cnocallewutxaqsxbned.supabase.co';
+    var SUPABASE_KEY = 'sb_publishable_eCrdmGWNBCXxVD_mN2_Nqw_lHHuHLum';
+
+    function computePoints(predH, predA, actH, actA) {
+      if (predH === actH && predA === actA) return 10;
+      var predDiff = predH - predA;
+      var actDiff = actH - actA;
+      if (predDiff === actDiff) return 5;
+      if (Math.sign(predDiff) === Math.sign(actDiff)) return 2;
+      return 0;
+    }
+
+    function formatName(username) {
+      return String(username || '')
+        .split(' ')
+        .filter(Boolean)
+        .map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); })
+        .join(' ');
+    }
+
+    function sbFetch(path) {
+      return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+        headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
+      }).then(function (r) {
+        if (!r.ok) throw new Error('Supabase error ' + r.status);
+        return r.json();
+      });
+    }
+
+    function renderRankList(rows) {
+      var list = document.getElementById('rank-list');
+      if (!list) return;
+      if (!rows.length) {
+        list.innerHTML = '<li><span class="rank-name">Le classement appara&icirc;tra d&egrave;s le premier match jou&eacute;.</span></li>';
+        return;
+      }
+      var top = rows.slice(0, 5);
+      list.innerHTML = top.map(function (row, i) {
+        var posClass = i === 0 ? ' p1' : i === 1 ? ' p2' : i === 2 ? ' p3' : '';
+        return '<li><span class="rank-pos' + posClass + '">' + (i + 1) + '</span>' +
+          '<span class="rank-name">' + row.name + '</span>' +
+          '<span class="rank-pts mono">' + row.points + ' pts</span></li>';
+      }).join('');
+    }
+
+    Promise.all([
+      sbFetch('matches?select=id,score_h,score_a,status&status=eq.finished'),
+      sbFetch('predictions?select=match_id,username,pred_h,pred_a'),
+      sbFetch('bonus_points?select=username,points')
+    ]).then(function (results) {
+      var matches = results[0], predictions = results[1], bonuses = results[2];
+      var matchById = {};
+      matches.forEach(function (m) { matchById[m.id] = m; });
+
+      var totals = {};
+      predictions.forEach(function (p) {
+        var m = matchById[p.match_id];
+        if (!m || m.score_h === null || m.score_a === null) return;
+        var pts = computePoints(p.pred_h, p.pred_a, m.score_h, m.score_a);
+        if (!totals[p.username]) totals[p.username] = { points: 0, exact: 0 };
+        totals[p.username].points += pts;
+        if (pts === 10) totals[p.username].exact += 1;
+      });
+      bonuses.forEach(function (b) {
+        if (!totals[b.username]) totals[b.username] = { points: 0, exact: 0 };
+        totals[b.username].points += (b.points || 0);
+      });
+
+      var rows = Object.keys(totals).map(function (username) {
+        return { name: formatName(username), points: totals[username].points, exact: totals[username].exact };
+      }).sort(function (a, b) { return b.points - a.points || b.exact - a.exact; });
+
+      renderRankList(rows);
+    }).catch(function () {
+      var list = document.getElementById('rank-list');
+      if (list) list.innerHTML = '<li><span class="rank-name">Classement indisponible pour le moment.</span></li>';
+    });
+  })();
+</script>
 </body>
 </html>
