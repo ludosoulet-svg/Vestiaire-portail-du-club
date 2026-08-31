@@ -3,73 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vestiaire — portail du club</title>
-<meta name="description" content="Portail du club : buvette, entraînements, boutique, pronostics et infos pratiques.">
+<title>PLCHB — Vestiaire du club</title>
+<meta name="description" content="Portail du club PLCHB : buvette, entraînements, boutique, pronostics et infos pratiques.">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
   :root {
-    --bg: #eef2ec;
-    --surface: #ffffff;
-    --surface-alt: #e3e9dd;
-    --ink: #16231a;
-    --ink-soft: #4b5a4e;
-    --ink-faint: #7c8a7e;
-    --pitch: #1f4d36;
-    --pitch-deep: #163a28;
-    --pitch-ink: #eaf1e7;
-    --accent: #b9791f;
-    --accent-ink: #4a3208;
-    --line: #d3dac9;
-    --line-soft: #e4e9dd;
-    --gold: #c98a2b;
-    --silver: #8a95a0;
-    --bronze: #a9713f;
-    --shadow: 0 1px 2px rgba(22,35,26,0.06), 0 8px 24px -12px rgba(22,35,26,0.18);
-    color-scheme: light;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #101b13;
-      --surface: #17251b;
-      --surface-alt: #1e2f22;
-      --ink: #eaf1e7;
-      --ink-soft: #a9bba9;
-      --ink-faint: #728274;
-      --pitch: #24593d;
-      --pitch-deep: #163a28;
-      --pitch-ink: #f4f8f1;
-      --accent: #e0a63c;
-      --accent-ink: #241701;
-      --line: #2a3b2e;
-      --line-soft: #22321f;
-      --gold: #e0a63c;
-      --silver: #9aa5ae;
-      --bronze: #c08657;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -12px rgba(0,0,0,0.55);
-      color-scheme: dark;
-    }
-  }
-
-  :root[data-theme="dark"] {
-    --bg: #101b13;
-    --surface: #17251b;
-    --surface-alt: #1e2f22;
-    --ink: #eaf1e7;
-    --ink-soft: #a9bba9;
-    --ink-faint: #728274;
-    --pitch: #24593d;
-    --pitch-deep: #163a28;
-    --pitch-ink: #f4f8f1;
-    --accent: #e0a63c;
-    --accent-ink: #241701;
-    --line: #2a3b2e;
-    --line-soft: #22321f;
-    --gold: #e0a63c;
-    --silver: #9aa5ae;
+    --navy: #0a2647;
+    --navy-deep: #071a33;
+    --panel: #123b69;
+    --panel-line: #2a5a93;
+    --gold: #ffd400;
+    --gold-deep: #c9a227;
+    --gold-ink: #241a00;
+    --blue-btn: #1e4e80;
+    --blue-btn-hover: #2a5f96;
+    --ink: #ffffff;
+    --ink-soft: rgba(255,255,255,0.76);
+    --ink-faint: rgba(255,255,255,0.52);
+    --silver: #a7b3bf;
     --bronze: #c08657;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -12px rgba(0,0,0,0.55);
+    --red: #e2453f;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 10px 26px -12px rgba(0,0,0,0.6);
     color-scheme: dark;
   }
 
@@ -79,7 +34,7 @@
 
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--navy);
     color: var(--ink);
     font-family: 'Karla', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -90,11 +45,11 @@
   }
 
   h1, h2, h3, .display {
-    font-family: 'Bebas Neue', 'Karla', sans-serif;
-    font-weight: 400;
+    font-family: 'Barlow Condensed', 'Karla', sans-serif;
+    font-weight: 700;
     letter-spacing: 0.02em;
     text-wrap: balance;
-    line-height: 1.02;
+    line-height: 1.05;
     margin: 0;
   }
 
@@ -110,31 +65,34 @@
   /* ---------- Header ---------- */
 
   .scoreboard {
-    background: linear-gradient(180deg, var(--pitch) 0%, var(--pitch-deep) 100%);
-    color: var(--pitch-ink);
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: var(--ink);
     border-bottom: 3px solid var(--gold);
   }
 
   .scoreboard-inner {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 22px 24px;
+    padding: 20px 24px;
     display: flex;
     align-items: center;
     gap: 16px;
   }
 
-  .crest { flex: none; width: 46px; height: 46px; }
+  .crest { flex: none; width: 52px; height: 52px; border-radius: 8px; }
+  .crest.right { margin-left: auto; }
 
   .club-name {
-    font-size: clamp(28px, 4vw, 38px);
+    font-size: clamp(26px, 3.6vw, 34px);
     letter-spacing: 0.03em;
+    color: var(--gold);
+    text-transform: uppercase;
   }
 
   .club-tag {
     margin: 2px 0 0;
     font-size: 13px;
-    color: color-mix(in srgb, var(--pitch-ink) 72%, transparent);
+    color: var(--ink-soft);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
@@ -153,27 +111,29 @@
   }
 
   .pill {
-    border: 1px solid var(--line);
-    background: var(--surface);
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
     color: var(--ink-soft);
     border-radius: 999px;
     padding: 7px 14px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     cursor: pointer;
     transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
 
-  .pill:hover { border-color: var(--accent); color: var(--ink); }
+  .pill:hover { border-color: var(--gold); color: var(--ink); }
 
   .pill[aria-current="true"] {
-    background: var(--pitch);
-    border-color: var(--pitch);
-    color: var(--pitch-ink);
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--gold-ink);
   }
 
   .pill:focus-visible, .tile:focus-visible, button:focus-visible, a:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--gold);
     outline-offset: 2px;
   }
 
@@ -191,7 +151,7 @@
 
   .intro { margin: 4px 0 26px; max-width: 62ch; }
   .intro p { color: var(--ink-soft); font-size: 16px; line-height: 1.55; margin: 6px 0 0; }
-  .intro h2 { font-size: clamp(26px, 3.4vw, 34px); }
+  .intro h2 { font-size: clamp(26px, 3.4vw, 34px); text-transform: uppercase; }
 
   .tiles {
     display: grid;
@@ -202,8 +162,8 @@
   .tile {
     position: relative;
     text-align: left;
-    background: var(--surface);
-    border: 1px solid var(--line);
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
     border-radius: 10px;
     padding: 22px 20px 20px;
     cursor: pointer;
@@ -224,14 +184,14 @@
     box-shadow: var(--shadow);
   }
 
-  .tile:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .tile:hover { transform: translateY(-3px); border-color: var(--gold); }
 
   .tile-icon {
     width: 30px; height: 30px;
-    color: var(--pitch);
+    color: var(--gold);
   }
 
-  .tile-title { font-size: 24px; }
+  .tile-title { font-size: 24px; text-transform: uppercase; }
   .tile-desc { color: var(--ink-soft); font-size: 14px; line-height: 1.5; margin: 0; }
   .tile-go {
     margin-top: auto;
@@ -239,7 +199,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--accent);
+    color: var(--gold);
   }
 
   /* ---------- Section shell ---------- */
@@ -249,12 +209,12 @@
     align-items: baseline;
     justify-content: space-between;
     gap: 12px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--panel-line);
     padding-bottom: 14px;
     margin-bottom: 22px;
   }
 
-  .section-head h2 { font-size: clamp(30px, 4vw, 42px); }
+  .section-head h2 { font-size: clamp(30px, 4vw, 42px); text-transform: uppercase; color: var(--gold); }
 
   .back-link {
     background: none;
@@ -270,7 +230,7 @@
     gap: 6px;
     padding: 6px 4px;
   }
-  .back-link:hover { color: var(--ink); }
+  .back-link:hover { color: var(--gold); }
   .back-link svg { width: 14px; height: 14px; }
 
   .lede { color: var(--ink-soft); max-width: 60ch; line-height: 1.55; margin: 0 0 26px; }
@@ -278,19 +238,19 @@
   /* ---------- Buvette ---------- */
 
   .price-groups { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .price-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
-  .price-card h3 { padding: 14px 18px; background: var(--surface-alt); font-size: 20px; border-bottom: 1px solid var(--line); }
+  .price-card { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+  .price-card h3 { padding: 14px 18px; background: var(--navy-deep); font-size: 20px; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--panel-line); }
   .price-list { list-style: none; margin: 0; padding: 6px 0; }
   .price-list li {
     display: flex; justify-content: space-between; gap: 12px;
     padding: 10px 18px;
     font-size: 14.5px;
-    border-bottom: 1px dashed var(--line-soft);
+    border-bottom: 1px dashed rgba(255,255,255,0.12);
   }
   .price-list li:last-child { border-bottom: none; }
   .price-list .name { color: var(--ink); }
   .price-list .note { display: block; font-size: 12px; color: var(--ink-faint); margin-top: 1px; }
-  .price-list .amount { color: var(--accent-ink); background: color-mix(in srgb, var(--gold) 16%, transparent); border-radius: 5px; padding: 1px 7px; font-weight: 600; white-space: nowrap; }
+  .price-list .amount { color: var(--gold-ink); background: var(--gold); border-radius: 5px; padding: 1px 8px; font-weight: 700; white-space: nowrap; }
 
   .buvette-note {
     margin-top: 22px;
@@ -302,44 +262,45 @@
 
   /* ---------- Entrainements ---------- */
 
-  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
-  table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--surface); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--panel-line); border-radius: 10px; box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--panel); }
   thead th {
     text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--ink-soft); background: var(--surface-alt);
-    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    color: var(--gold); background: var(--navy-deep);
+    padding: 12px 16px; border-bottom: 1px solid var(--panel-line);
   }
-  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--line-soft); font-size: 14.5px; vertical-align: top; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14.5px; vertical-align: top; }
   tbody tr:last-child td { border-bottom: none; }
   .grp {
     display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.03em;
-    padding: 2px 9px; border-radius: 999px; background: var(--surface-alt); color: var(--ink-soft);
+    padding: 2px 10px; border-radius: 999px; background: transparent; color: var(--gold);
+    border: 1px solid var(--gold-deep);
   }
-  .grp.seniors { background: color-mix(in srgb, var(--pitch) 16%, transparent); color: var(--pitch); }
-  :root[data-theme="dark"] .grp.seniors { color: var(--pitch-ink); }
+  .grp.seniors { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
 
   /* ---------- Boutique ---------- */
 
   .shop-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
   .product {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
     box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column;
   }
   .product-swatch {
     height: 92px;
     display: flex; align-items: center; justify-content: center;
   }
-  .product-swatch svg { width: 40px; height: 40px; color: var(--pitch-ink); opacity: 0.92; }
+  .product-swatch svg { width: 40px; height: 40px; color: var(--navy); opacity: 0.92; }
   .product-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .product h3 { font-family: 'Karla', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0; }
   .product .desc { font-size: 12.5px; color: var(--ink-faint); margin: 0; line-height: 1.4; flex: 1; }
   .product-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
-  .product .price { font-size: 15px; font-weight: 600; color: var(--accent-ink); }
+  .product .price { font-size: 15px; font-weight: 700; color: var(--gold); }
   .product .buy {
     font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-    color: var(--pitch-ink); background: var(--pitch); border: none; border-radius: 6px;
+    color: var(--ink); background: var(--blue-btn); border: none; border-radius: 6px;
     padding: 7px 12px; cursor: pointer;
   }
+  .product .buy:hover { background: var(--blue-btn-hover); }
 
   /* ---------- Pronostics ---------- */
 
@@ -347,34 +308,37 @@
   @media (max-width: 720px) { .pronos-layout { grid-template-columns: 1fr; } }
 
   .cta-card {
-    background: linear-gradient(155deg, var(--pitch) 0%, var(--pitch-deep) 100%);
-    color: var(--pitch-ink);
+    background: linear-gradient(155deg, var(--panel) 0%, var(--navy-deep) 100%);
+    color: var(--ink);
+    border: 1px solid var(--panel-line);
     border-radius: 12px;
     padding: 26px 24px;
     box-shadow: var(--shadow);
   }
-  .cta-card h3 { font-size: 26px; margin-bottom: 8px; }
-  .cta-card p { color: color-mix(in srgb, var(--pitch-ink) 82%, transparent); font-size: 14px; line-height: 1.55; margin: 0 0 18px; }
+  .cta-card h3 { font-size: 26px; margin-bottom: 8px; text-transform: uppercase; color: var(--gold); }
+  .cta-card p { color: var(--ink-soft); font-size: 14px; line-height: 1.55; margin: 0 0 18px; }
   .cta-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--gold); color: var(--accent-ink);
+    background: var(--gold); color: var(--gold-ink);
     font-weight: 700; font-size: 14px; text-decoration: none;
     padding: 11px 18px; border-radius: 8px;
+    text-transform: uppercase; letter-spacing: 0.02em;
   }
+  .cta-btn:hover { background: var(--gold-deep); }
   .cta-btn svg { width: 16px; height: 16px; }
-  .cta-hint { margin-top: 14px; font-size: 12px; color: color-mix(in srgb, var(--pitch-ink) 65%, transparent); }
+  .cta-hint { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
 
-  .rank-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
-  .rank-card h3 { padding: 14px 18px; background: var(--surface-alt); border-bottom: 1px solid var(--line); font-size: 18px; font-family: 'Karla'; font-weight: 700; letter-spacing: 0; }
+  .rank-card { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+  .rank-card h3 { padding: 14px 18px; background: var(--navy-deep); border-bottom: 1px solid var(--panel-line); font-size: 18px; font-family: 'Karla'; font-weight: 700; letter-spacing: 0; color: var(--gold); }
   .rank-list { list-style: none; margin: 0; padding: 4px 0; }
-  .rank-list li { display: flex; align-items: center; gap: 12px; padding: 9px 18px; font-size: 14px; border-bottom: 1px dashed var(--line-soft); }
+  .rank-list li { display: flex; align-items: center; gap: 12px; padding: 9px 18px; font-size: 14px; border-bottom: 1px dashed rgba(255,255,255,0.12); }
   .rank-list li:last-child { border-bottom: none; }
   .rank-pos {
     width: 22px; height: 22px; border-radius: 50%; flex: none;
     display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; background: var(--surface-alt); color: var(--ink-soft);
+    font-size: 11px; font-weight: 700; background: var(--navy-deep); color: var(--ink-soft);
   }
-  .rank-pos.p1 { background: var(--gold); color: var(--accent-ink); }
+  .rank-pos.p1 { background: var(--gold); color: var(--gold-ink); }
   .rank-pos.p2 { background: var(--silver); color: #1a1a1a; }
   .rank-pos.p3 { background: var(--bronze); color: #2a1503; }
   .rank-name { flex: 1; }
@@ -383,16 +347,14 @@
   /* ---------- Contact ---------- */
 
   .contact-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 22px; }
-  .info-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; box-shadow: var(--shadow); display: flex; gap: 12px; }
-  .info-card svg { width: 20px; height: 20px; color: var(--pitch); flex: none; margin-top: 2px; }
-  :root[data-theme="dark"] .info-card svg { color: var(--accent); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .info-card svg { color: var(--accent); } }
+  .info-card { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px; padding: 18px; box-shadow: var(--shadow); display: flex; gap: 12px; }
+  .info-card svg { width: 20px; height: 20px; color: var(--gold); flex: none; margin-top: 2px; }
   .info-card h3 { font-family: 'Karla'; font-weight: 700; font-size: 14px; letter-spacing: 0; margin-bottom: 4px; }
   .info-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
 
   .bureau-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .bureau-list li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
-  .bureau-list .role { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 2px; }
+  .bureau-list li { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
+  .bureau-list .role { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-deep); margin-bottom: 2px; }
 
   footer {
     text-align: center; padding: 22px 24px 40px; color: var(--ink-faint); font-size: 12px;
@@ -403,15 +365,12 @@
 
 <div class="scoreboard">
   <div class="scoreboard-inner">
-    <svg class="crest" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M24 2 L44 9 V26 C44 39 35.5 47.5 24 52 C12.5 47.5 4 39 4 26 V9 Z" fill="var(--gold)"/>
-      <path d="M24 6 L40 12 V26 C40 37 33 44 24 48 C15 44 8 37 8 26 V12 Z" fill="var(--pitch-deep)"/>
-      <path d="M24 15 L30 27 L24 39 L18 27 Z" fill="var(--gold)"/>
-    </svg>
+    <img class="crest" src="data:image/png;base64,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" alt="Logo PLCHB" aria-hidden="true">
     <div class="header-flex">
-      <h1 class="club-name" id="club-name">Vestiaire &mdash; AS Verchamps</h1>
-      <p class="club-tag">Espace du club &middot; toutes les infos au m&ecirc;me endroit</p>
+      <h1 class="club-name" id="club-name">PLCHB</h1>
+      <p class="club-tag">Vestiaire du club &middot; toutes les infos au m&ecirc;me endroit</p>
     </div>
+    <img class="crest right" src="data:image/png;base64,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" alt="Logo PLCHB" aria-hidden="true">
   </div>
   <nav class="pillbar" id="pillbar" aria-label="Navigation rapide">
     <button class="pill" data-nav="home" aria-current="true">Accueil</button>
@@ -501,7 +460,7 @@
         </ul>
       </div>
     </div>
-    <p class="buvette-note">Tenue par les parents b&eacute;n&eacute;voles &mdash; le planning de permanence est affich&eacute; au club-house. Contact buvette&nbsp;: buvette@club-exemple.fr</p>
+    <p class="buvette-note">Tenue par les parents b&eacute;n&eacute;voles &mdash; le planning de permanence est affich&eacute; au club-house. Contact buvette&nbsp;: buvette@plchb-exemple.fr</p>
   </section>
 
   <!-- ENTRAINEMENTS -->
@@ -518,12 +477,12 @@
           <tr><th>Cat&eacute;gorie</th><th>Jour</th><th>Horaire</th><th>Lieu</th></tr>
         </thead>
         <tbody>
-          <tr><td><span class="grp">U9 / U11</span></td><td>Mardi</td><td class="mono">17h30 &ndash; 18h45</td><td>Stade Municipal &mdash; terrain B</td></tr>
-          <tr><td><span class="grp">U9 / U11</span></td><td>Vendredi</td><td class="mono">17h30 &ndash; 18h45</td><td>Stade Municipal &mdash; terrain B</td></tr>
-          <tr><td><span class="grp">U13 / U15</span></td><td>Mardi</td><td class="mono">18h00 &ndash; 19h30</td><td>Stade Municipal &mdash; terrain A</td></tr>
-          <tr><td><span class="grp">U13 / U15</span></td><td>Jeudi</td><td class="mono">18h00 &ndash; 19h30</td><td>Stade Municipal &mdash; terrain A</td></tr>
-          <tr><td><span class="grp seniors">Seniors</span></td><td>Mardi</td><td class="mono">19h30 &ndash; 21h00</td><td>Stade Municipal &mdash; terrain A</td></tr>
-          <tr><td><span class="grp seniors">Seniors</span></td><td>Jeudi</td><td class="mono">19h30 &ndash; 21h00</td><td>Stade Municipal &mdash; terrain A</td></tr>
+          <tr><td><span class="grp">U9 / U11</span></td><td>Mardi</td><td class="mono">17h30 &ndash; 18h45</td><td>Gymnase Municipal &mdash; salle B</td></tr>
+          <tr><td><span class="grp">U9 / U11</span></td><td>Vendredi</td><td class="mono">17h30 &ndash; 18h45</td><td>Gymnase Municipal &mdash; salle B</td></tr>
+          <tr><td><span class="grp">U13 / U15</span></td><td>Mardi</td><td class="mono">18h00 &ndash; 19h30</td><td>Gymnase Municipal &mdash; salle A</td></tr>
+          <tr><td><span class="grp">U13 / U15</span></td><td>Jeudi</td><td class="mono">18h00 &ndash; 19h30</td><td>Gymnase Municipal &mdash; salle A</td></tr>
+          <tr><td><span class="grp seniors">Seniors</span></td><td>Mardi</td><td class="mono">19h30 &ndash; 21h00</td><td>Gymnase Municipal &mdash; salle A</td></tr>
+          <tr><td><span class="grp seniors">Seniors</span></td><td>Jeudi</td><td class="mono">19h30 &ndash; 21h00</td><td>Gymnase Municipal &mdash; salle A</td></tr>
           <tr><td><span class="grp">Loisir</span></td><td>Mercredi</td><td class="mono">20h00 &ndash; 21h15</td><td>Gymnase Jean-Moulin</td></tr>
         </tbody>
       </table>
@@ -540,17 +499,17 @@
 
     <div class="shop-grid">
       <div class="product">
-        <div class="product-swatch" style="background:var(--pitch)">
+        <div class="product-swatch" style="background:var(--gold)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4 6 7v13h12V7l-2-3"/><path d="M8 4a4 4 0 0 0 8 0"/></svg>
         </div>
         <div class="product-body">
           <h3>Maillot domicile</h3>
-          <p class="desc">Vert &amp; or, floquage disponible.</p>
+          <p class="desc">Bleu marine &amp; or, floquage disponible.</p>
           <div class="product-foot"><span class="price mono">38 &euro;</span><button class="buy">Voir</button></div>
         </div>
       </div>
       <div class="product">
-        <div class="product-swatch" style="background:var(--accent)">
+        <div class="product-swatch" style="background:var(--blue-btn)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4 6 7v13h12V7l-2-3"/><path d="M8 4a4 4 0 0 0 8 0"/></svg>
         </div>
         <div class="product-body">
@@ -560,8 +519,8 @@
         </div>
       </div>
       <div class="product">
-        <div class="product-swatch" style="background:var(--ink)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4h12l2 4-3 2v10H7V10L4 8Z"/></svg>
+        <div class="product-swatch" style="background:var(--navy-deep)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--gold)"><path d="M6 4h12l2 4-3 2v10H7V10L4 8Z"/></svg>
         </div>
         <div class="product-body">
           <h3>Surv&ecirc;tement</h3>
@@ -570,7 +529,7 @@
         </div>
       </div>
       <div class="product">
-        <div class="product-swatch" style="background:var(--pitch-deep)">
+        <div class="product-swatch" style="background:var(--gold-deep)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><path d="M12 5v2M12 17v2M5 12h2M17 12h2"/></svg>
         </div>
         <div class="product-body">
@@ -608,17 +567,17 @@
       <h2>Pronostics</h2>
       <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
     </div>
-    <p class="lede">Le concours de pronostics r&eacute;unit les licenci&eacute;s autour des matchs de l&rsquo;&eacute;quipe premi&egrave;re. Un score exact rapporte 3 points, un bon r&eacute;sultat 1 point.</p>
+    <p class="lede">Le concours de pronostics r&eacute;unit les licenci&eacute;s autour des matchs du club. Un score exact rapporte le plus de points.</p>
 
     <div class="pronos-layout">
       <div class="cta-card">
         <h3>Rejoindre le concours</h3>
-        <p>Les pronostics se font sur le site d&eacute;di&eacute;, avant chaque coup d&rsquo;envoi. Inscription libre pour tous les licenci&eacute;s du club.</p>
-        <a class="cta-btn" href="#" target="_blank" rel="noopener">
+        <p>Les pronostics se font sur PLCHB Pronostic, avant chaque coup d&rsquo;envoi. Inscription libre pour tous les licenci&eacute;s du club.</p>
+        <a class="cta-btn" href="https://plchb-prono.vercel.app" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M8 5H5v14h14v-3"/></svg>
-          Ouvrir le site de pronostics
+          Ouvrir PLCHB Pronostic
         </a>
-        <p class="cta-hint">Lien &agrave; remplacer par l&rsquo;adresse r&eacute;elle du site de pronostics du club.</p>
+        <p class="cta-hint">plchb-prono.vercel.app</p>
       </div>
 
       <div class="rank-card">
@@ -645,7 +604,7 @@
     <div class="contact-grid">
       <div class="info-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Adresse</h3><p>Stade Municipal<br>12 rue des Sports, 00000 Verchamps</p></div>
+        <div><h3>Adresse</h3><p>Gymnase Municipal<br>12 rue des Sports, 78370 Plaisir</p></div>
       </div>
       <div class="info-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.6 22 2 14.4 2 7a2 2 0 0 1 2-2Z"/></svg>
@@ -653,7 +612,7 @@
       </div>
       <div class="info-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg>
-        <div><h3>E-mail</h3><p>contact@club-exemple.fr</p></div>
+        <div><h3>E-mail</h3><p>contact@plchb-exemple.fr</p></div>
       </div>
       <div class="info-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
@@ -661,18 +620,18 @@
       </div>
     </div>
 
-    <h3 style="font-family:'Karla'; font-weight:700; font-size:15px; letter-spacing:0; margin-bottom:12px;">Le bureau</h3>
+    <h3 style="font-family:'Karla'; font-weight:700; font-size:15px; letter-spacing:0; margin-bottom:12px; color:var(--gold);">Le bureau</h3>
     <ul class="bureau-list">
       <li><span class="role">Pr&eacute;sident</span>Marc Dubreuil</li>
       <li><span class="role">Tr&eacute;sori&egrave;re</span>Nadia Ferreira</li>
       <li><span class="role">Secr&eacute;taire</span>Julien Costa</li>
-      <li><span class="role">Responsable &eacute;cole de foot</span>Aïcha Benali</li>
+      <li><span class="role">Responsable &eacute;cole de hand</span>A&iuml;cha Benali</li>
     </ul>
   </section>
 
 </main>
 
-<footer>Vestiaire &mdash; contenu d&rsquo;exemple &agrave; remplacer par les informations r&eacute;elles du club.</footer>
+<footer>PLCHB &mdash; Vestiaire du club &middot; contenu d&rsquo;exemple &agrave; remplacer par les informations r&eacute;elles.</footer>
 
 <script>
   (function () {
