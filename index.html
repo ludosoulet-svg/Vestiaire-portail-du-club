@@ -386,6 +386,7 @@
     <button class="pill" data-nav="entrainements">Entra&icirc;nements</button>
     <button class="pill" data-nav="boutique">Boutique</button>
     <button class="pill" data-nav="pronostics">Pronostics</button>
+    <button class="pill" data-nav="braderie">Braderie</button>
     <button class="pill" data-nav="contact">Infos pratiques</button>
   </nav>
 </div>
@@ -426,6 +427,13 @@
         <div class="tile-title">Pronostics</div>
         <p class="tile-desc">Concours de pronostics entre licenci&eacute;s &mdash; classement et lien vers le site.</p>
         <span class="tile-go">Jouer &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="braderie">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.6 12.6 12.7 20.5a2 2 0 0 1-2.8 0L3.5 14.1a2 2 0 0 1 0-2.8L11.4 3.4a2 2 0 0 1 1.4-.6H18a2 2 0 0 1 2 2v5.4a2 2 0 0 1-.6 1.4Z"/><circle cx="15.5" cy="7.5" r="1.5"/></svg>
+        <div class="tile-title">Braderie</div>
+        <p class="tile-desc">Achat, vente et &eacute;change de tenues et &eacute;quipements entre licenci&eacute;s.</p>
+        <span class="tile-go">Voir la braderie &rarr;</span>
       </button>
 
       <button class="tile" data-nav="contact">
@@ -587,6 +595,25 @@
     </div>
   </section>
 
+  <!-- BRADERIE -->
+  <section class="view" id="view-braderie" hidden>
+    <div class="section-head">
+      <h2>Braderie</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Achat, vente et &eacute;change de tenues et d&rsquo;&eacute;quipements entre licenci&eacute;s du club, notamment en d&eacute;but et fin de saison.</p>
+
+    <div class="cta-card" style="max-width:480px">
+      <h3>Acc&eacute;der &agrave; la braderie</h3>
+      <p>Les annonces se d&eacute;posent et se consultent sur Bourse aux V&ecirc;tements PLCHB, ouvert &agrave; tous les licenci&eacute;s.</p>
+      <a class="cta-btn" href="https://bourse-handball.vercel.app" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M8 5H5v14h14v-3"/></svg>
+        Ouvrir la Braderie
+      </a>
+      <p class="cta-hint">bourse-handball.vercel.app</p>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="view" id="view-contact" hidden>
     <div class="section-head">
@@ -629,7 +656,7 @@
 
 <script>
   (function () {
-    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'contact'];
+    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'braderie', 'contact'];
 
     function show(name) {
       if (views.indexOf(name) === -1) name = 'home';
