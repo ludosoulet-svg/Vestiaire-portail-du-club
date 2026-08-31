@@ -278,6 +278,14 @@
   }
   .grp.seniors { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
 
+  .planning-wrap {
+    border: 1px solid var(--panel-line); border-radius: 10px; box-shadow: var(--shadow);
+    background: var(--panel); padding: 10px; overflow-x: auto;
+  }
+  .planning-wrap a { display: block; }
+  .planning-img { width: 100%; min-width: 720px; height: auto; display: block; border-radius: 6px; }
+  .planning-hint { margin: 10px 2px 0; font-size: 12px; color: var(--ink-faint); }
+
   /* ---------- Boutique ---------- */
 
   .shop-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -471,22 +479,12 @@
     </div>
     <p class="lede">Planning hebdomadaire hors vacances scolaires. En cas d&rsquo;intemp&eacute;ries, l&rsquo;annulation est annonc&eacute;e sur le groupe de discussion de chaque cat&eacute;gorie.</p>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Cat&eacute;gorie</th><th>Jour</th><th>Horaire</th><th>Lieu</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="grp">U9 / U11</span></td><td>Mardi</td><td class="mono">17h30 &ndash; 18h45</td><td>Gymnase Municipal &mdash; salle B</td></tr>
-          <tr><td><span class="grp">U9 / U11</span></td><td>Vendredi</td><td class="mono">17h30 &ndash; 18h45</td><td>Gymnase Municipal &mdash; salle B</td></tr>
-          <tr><td><span class="grp">U13 / U15</span></td><td>Mardi</td><td class="mono">18h00 &ndash; 19h30</td><td>Gymnase Municipal &mdash; salle A</td></tr>
-          <tr><td><span class="grp">U13 / U15</span></td><td>Jeudi</td><td class="mono">18h00 &ndash; 19h30</td><td>Gymnase Municipal &mdash; salle A</td></tr>
-          <tr><td><span class="grp seniors">Seniors</span></td><td>Mardi</td><td class="mono">19h30 &ndash; 21h00</td><td>Gymnase Municipal &mdash; salle A</td></tr>
-          <tr><td><span class="grp seniors">Seniors</span></td><td>Jeudi</td><td class="mono">19h30 &ndash; 21h00</td><td>Gymnase Municipal &mdash; salle A</td></tr>
-          <tr><td><span class="grp">Loisir</span></td><td>Mercredi</td><td class="mono">20h00 &ndash; 21h15</td><td>Gymnase Jean-Moulin</td></tr>
-        </tbody>
-      </table>
+    <div class="planning-wrap">
+      <a href="planning.jpg" target="_blank" rel="noopener">
+        <img class="planning-img" src="planning.jpg" alt="Planning hebdomadaire des entra&icirc;nements PLCHB par cat&eacute;gorie, jour, horaire et lieu">
+      </a>
     </div>
+    <p class="planning-hint">Fais glisser horizontalement sur mobile, ou touche l&rsquo;image pour l&rsquo;ouvrir en plein &eacute;cran.</p>
   </section>
 
   <!-- BOUTIQUE -->
