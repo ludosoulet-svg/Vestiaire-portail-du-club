@@ -334,6 +334,19 @@
   /* ---------- Boutique ---------- */
 
   .shop-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+  .sponsor-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .sponsor-card {
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
+    padding: 22px 16px; text-align: center;
+  }
+  .sponsor-logo {
+    width: 68px; height: 68px; margin: 0 auto 12px; border-radius: 50%;
+    background: var(--panel-line); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .sponsor-card h3 { margin: 0 0 4px; font-size: 15px; }
+  .sponsor-card .desc { margin: 0; font-size: 12.5px; color: var(--ink-faint); }
   .product {
     background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
     box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column;
@@ -432,6 +445,7 @@
     <button class="pill" data-nav="boutique">Boutique</button>
     <button class="pill" data-nav="pronostics">Pronostics</button>
     <button class="pill" data-nav="braderie">Braderie</button>
+    <button class="pill" data-nav="sponsors">Sponsors</button>
     <button class="pill" data-nav="contact">Infos pratiques</button>
   </nav>
 </div>
@@ -479,6 +493,13 @@
         <div class="tile-title">Braderie</div>
         <p class="tile-desc">Achat et vente de tenues et &eacute;quipements entre licenci&eacute;s.</p>
         <span class="tile-go">Voir la braderie &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="sponsors">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8.5 12.5 11 15l4.5-6"/><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z"/></svg>
+        <div class="tile-title">Sponsors</div>
+        <p class="tile-desc">Les partenaires qui soutiennent le club.</p>
+        <span class="tile-go">Voir les sponsors &rarr;</span>
       </button>
 
       <button class="tile" data-nav="contact">
@@ -588,6 +609,38 @@
     </div>
   </section>
 
+  <!-- SPONSORS -->
+  <section class="view" id="view-sponsors" hidden>
+    <div class="section-head">
+      <h2>Sponsors</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Merci aux partenaires qui soutiennent le club &mdash; contenu d&rsquo;exemple &agrave; remplacer par les vrais sponsors.</p>
+
+    <div class="sponsor-grid">
+      <div class="sponsor-card">
+        <div class="sponsor-logo">LOGO</div>
+        <h3>Nom du sponsor</h3>
+        <p class="desc">Partenaire officiel</p>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">LOGO</div>
+        <h3>Nom du sponsor</h3>
+        <p class="desc">Partenaire officiel</p>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">LOGO</div>
+        <h3>Nom du sponsor</h3>
+        <p class="desc">Partenaire officiel</p>
+      </div>
+      <div class="sponsor-card">
+        <div class="sponsor-logo">LOGO</div>
+        <h3>Nom du sponsor</h3>
+        <p class="desc">Partenaire officiel</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="view" id="view-contact" hidden>
     <div class="section-head">
@@ -648,7 +701,7 @@
 
 <script>
   (function () {
-    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'braderie', 'contact'];
+    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'braderie', 'sponsors', 'contact'];
 
     function show(name) {
       if (views.indexOf(name) === -1) name = 'home';
