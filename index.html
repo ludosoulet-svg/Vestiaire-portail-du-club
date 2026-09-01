@@ -298,6 +298,39 @@
     color: #fff; font-size: 32px; line-height: 1; cursor: pointer;
   }
 
+  .promo-overlay {
+    position: fixed; inset: 0; background: rgba(4, 10, 26, 0.72);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px; z-index: 998;
+  }
+  .promo-overlay.open { display: flex; }
+  .promo-card {
+    background: var(--panel); border: 1px solid var(--gold); border-radius: 14px;
+    padding: 30px 24px 24px; max-width: 320px; width: 100%; text-align: center;
+    position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+  }
+  .promo-close {
+    position: absolute; top: 8px; right: 12px; background: none; border: none;
+    font-size: 26px; line-height: 1; color: var(--ink-faint); cursor: pointer;
+  }
+  .promo-badge {
+    display: inline-block; background: var(--gold); color: var(--gold-ink);
+    font-weight: 800; font-size: 22px; padding: 6px 18px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .promo-card h3 { margin: 0 0 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; letter-spacing: 0.02em; color: var(--ink); }
+  .promo-card p { margin: 0 0 10px; font-size: 13.5px; color: var(--ink-faint); }
+  .promo-code {
+    font-family: 'IBM Plex Mono', monospace; font-size: 22px; letter-spacing: 0.1em;
+    background: var(--navy-deep); color: var(--gold); border: 1px dashed var(--gold);
+    border-radius: 8px; padding: 10px; cursor: pointer; margin-bottom: 4px; user-select: all;
+  }
+  .promo-expiry { font-size: 12px; margin-top: 10px; }
+  .promo-cta {
+    margin-top: 14px; width: 100%; padding: 12px; border-radius: 999px; border: none;
+    background: var(--blue-btn); color: #fff; font-weight: 700; cursor: pointer; font-size: 14px;
+  }
+  .promo-cta:hover { background: var(--blue-btn-hover); }
+
   /* ---------- Boutique ---------- */
 
   .shop-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -600,6 +633,19 @@
   <img id="lightbox-img" src="" alt="">
 </div>
 
+<div class="promo-overlay" id="promoOverlay" onclick="closePromo()">
+  <div class="promo-card" onclick="event.stopPropagation()">
+    <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
+    <div class="promo-badge">-15%</div>
+    <h3>Offre boutique du club</h3>
+    <p>Profite de &minus;15% sur la boutique HelloAsso du PLCHB avec le code&nbsp;:</p>
+    <div class="promo-code" id="promoCode" onclick="copyPromoCode()">PLCHB26</div>
+    <p class="promo-hint" id="promoCopyHint">Touche le code pour le copier</p>
+    <p class="promo-expiry">Offre valable jusqu&rsquo;au 20 septembre.</p>
+    <button class="promo-cta" onclick="goToBoutiqueFromPromo()">Voir la boutique</button>
+  </div>
+</div>
+
 <script>
   (function () {
     var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'braderie', 'contact'];
@@ -640,6 +686,43 @@
     document.getElementById('lightbox').classList.remove('open');
     document.getElementById('lightbox-img').src = '';
   }
+
+  function closePromo() {
+    document.getElementById('promoOverlay').classList.remove('open');
+    try { sessionStorage.setItem('plchb-promo-seen', '1'); } catch (e) {}
+  }
+  function copyPromoCode() {
+    var code = 'PLCHB26';
+    var hint = document.getElementById('promoCopyHint');
+    function done() {
+      if (hint) {
+        hint.textContent = 'Code copi\u00e9 !';
+        setTimeout(function () { hint.textContent = 'Touche le code pour le copier'; }, 2000);
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done).catch(done);
+    } else {
+      done();
+    }
+  }
+  function goToBoutiqueFromPromo() {
+    closePromo();
+    var t = document.querySelector('[data-nav="boutique"]');
+    if (t) t.click();
+  }
+
+  (function () {
+    var promoDeadline = new Date('2026-09-20T23:59:59');
+    if (new Date() > promoDeadline) return;
+    var seen = false;
+    try { seen = sessionStorage.getItem('plchb-promo-seen') === '1'; } catch (e) {}
+    if (seen) return;
+    setTimeout(function () {
+      var overlay = document.getElementById('promoOverlay');
+      if (overlay) overlay.classList.add('open');
+    }, 900);
+  })();
 </script>
 
 <script>
