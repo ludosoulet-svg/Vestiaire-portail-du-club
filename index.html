@@ -347,6 +347,11 @@
   }
   .sponsor-card h3 { margin: 0 0 4px; font-size: 15px; }
   .sponsor-card .desc { margin: 0; font-size: 12.5px; color: var(--ink-faint); }
+  .sponsor-banner {
+    grid-column: 1 / -1; display: block; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--panel-line); box-shadow: var(--shadow);
+  }
+  .sponsor-banner img { width: 100%; height: auto; display: block; }
   .product {
     background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
     box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column;
@@ -615,29 +620,12 @@
       <h2>Sponsors</h2>
       <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
     </div>
-    <p class="lede">Merci aux partenaires qui soutiennent le club &mdash; contenu d&rsquo;exemple &agrave; remplacer par les vrais sponsors.</p>
+    <p class="lede">Merci &agrave; nos partenaires qui soutiennent le club.</p>
 
     <div class="sponsor-grid">
-      <div class="sponsor-card">
-        <div class="sponsor-logo">LOGO</div>
-        <h3>Nom du sponsor</h3>
-        <p class="desc">Partenaire officiel</p>
-      </div>
-      <div class="sponsor-card">
-        <div class="sponsor-logo">LOGO</div>
-        <h3>Nom du sponsor</h3>
-        <p class="desc">Partenaire officiel</p>
-      </div>
-      <div class="sponsor-card">
-        <div class="sponsor-logo">LOGO</div>
-        <h3>Nom du sponsor</h3>
-        <p class="desc">Partenaire officiel</p>
-      </div>
-      <div class="sponsor-card">
-        <div class="sponsor-logo">LOGO</div>
-        <h3>Nom du sponsor</h3>
-        <p class="desc">Partenaire officiel</p>
-      </div>
+      <a class="sponsor-banner" href="https://royalarcade78.fr" target="_blank" rel="noopener">
+        <img src="sponsor-royal-arcade.jpg" alt="Royal Arcade 78 &mdash; location de flippers, bornes d&rsquo;arcade, fl&eacute;chettes, baby-foot, photobooth, pour particuliers et professionnels">
+      </a>
     </div>
   </section>
 
