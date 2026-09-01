@@ -689,10 +689,7 @@
 
   function closePromo() {
     document.getElementById('promoOverlay').classList.remove('open');
-    try {
-      var today = new Date().toISOString().slice(0, 10);
-      localStorage.setItem('plchb-promo-last-shown', today);
-    } catch (e) {}
+    try { sessionStorage.setItem('plchb-promo-seen', '1'); } catch (e) {}
   }
   function copyPromoCode() {
     var code = 'PLCHB26';
@@ -718,10 +715,9 @@
   (function () {
     var promoDeadline = new Date('2026-09-20T23:59:59');
     if (new Date() > promoDeadline) return;
-    var today = new Date().toISOString().slice(0, 10);
-    var lastShown = null;
-    try { lastShown = localStorage.getItem('plchb-promo-last-shown'); } catch (e) {}
-    if (lastShown === today) return;
+    var seen = false;
+    try { seen = sessionStorage.getItem('plchb-promo-seen') === '1'; } catch (e) {}
+    if (seen) return;
     setTimeout(function () {
       var overlay = document.getElementById('promoOverlay');
       if (overlay) overlay.classList.add('open');
