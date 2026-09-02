@@ -424,13 +424,15 @@
   .info-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
 
   .venue-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  .venue-card {
-    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
+  .venue-card { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
     padding: 16px 18px; display: flex; gap: 12px; box-shadow: var(--shadow);
+    text-decoration: none; color: inherit; transition: border-color .15s;
   }
+  .venue-card:hover { border-color: var(--gold); }
   .venue-card svg { width: 20px; height: 20px; color: var(--gold); flex: none; margin-top: 2px; }
   .venue-card h3 { font-family: 'Karla'; font-weight: 700; font-size: 14px; margin: 0 0 4px; }
   .venue-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+  .venue-card .maps-hint { display: block; margin-top: 6px; font-size: 11.5px; color: var(--gold-deep); }
 
   .bureau-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
   .bureau-list li { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
@@ -688,34 +690,34 @@
     <p class="lede">Les salles o&ugrave; se d&eacute;roulent les entra&icirc;nements et matchs du club.</p>
 
     <div class="venue-grid">
-      <div class="venue-card">
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Gymnase+Nicole+Hassler%2C+Sente+de+l%27%C3%A9cole%2C+78370+Plaisir" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Gymnase Nicole Hassler</h3><p>Sente de l&rsquo;&eacute;cole<br>78370 Plaisir</p></div>
-      </div>
-      <div class="venue-card">
+        <div><h3>Gymnase Nicole Hassler</h3><p>Sente de l&rsquo;&eacute;cole<br>78370 Plaisir</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Palais+des+sports+Pierre+de+Coubertin%2C+10+Av.+de+Geesthacht%2C+78370+Plaisir" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Palais des sports Pierre de Coubertin</h3><p>10 Av. de Geesthacht<br>78370 Plaisir</p></div>
-      </div>
-      <div class="venue-card">
+        <div><h3>Palais des sports Pierre de Coubertin</h3><p>10 Av. de Geesthacht<br>78370 Plaisir</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Complexe+sportif+du+Jeu+de+Paume%2C+13+Av.+du+Grand+Canal%2C+78450+Villepreux" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Complexe sportif du Jeu de Paume</h3><p>13 Av. du Grand Canal<br>78450 Villepreux</p></div>
-      </div>
-      <div class="venue-card">
+        <div><h3>Complexe sportif du Jeu de Paume</h3><p>13 Av. du Grand Canal<br>78450 Villepreux</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Gymnase+Alain+Mimoun%2C+Av.+du+G%C3%A9n%C3%A9ral+de+Gaulle%2C+78450+Villepreux" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Gymnase Alain Mimoun</h3><p>Av. du G&eacute;n&eacute;ral de Gaulle<br>78450 Villepreux</p></div>
-      </div>
-      <div class="venue-card">
+        <div><h3>Gymnase Alain Mimoun</h3><p>Av. du G&eacute;n&eacute;ral de Gaulle<br>78450 Villepreux</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Gymnase+Jean+Guimier%2C+14+Rue+Pablo+Neruda%2C+78340+Les+Clayes-sous-Bois" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Gymnase Jean Guimier</h3><p>14 Rue Pablo Neruda<br>78340 Les Clayes-sous-Bois</p></div>
-      </div>
-      <div class="venue-card">
+        <div><h3>Gymnase Jean Guimier</h3><p>14 Rue Pablo Neruda<br>78340 Les Clayes-sous-Bois</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Centre+sportif+Thierry+Gilardi%2C+Ruelle+Mathieu%2C+78340+Les+Clayes-sous-Bois" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Centre sportif Thierry Gilardi</h3><p>Ruelle Mathieu<br>78340 Les Clayes-sous-Bois</p></div>
-      </div>
-      <div class="venue-card">
+        <div><h3>Centre sportif Thierry Gilardi</h3><p>Ruelle Mathieu<br>78340 Les Clayes-sous-Bois</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
+      <a class="venue-card" href="https://www.google.com/maps/search/?api=1&query=Gymnase+Dorine+Bourneton%2C+2+Passage+Anne+Frank%2C+78340+Les+Clayes-sous-Bois" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Gymnase Dorine Bourneton</h3><p>2 Pass. Anne Frank<br>78340 Les Clayes-sous-Bois</p></div>
-      </div>
+        <div><h3>Gymnase Dorine Bourneton</h3><p>2 Pass. Anne Frank<br>78340 Les Clayes-sous-Bois</p><span class="maps-hint">Voir sur Maps &rarr;</span></div>
+      </a>
     </div>
   </section>
 
