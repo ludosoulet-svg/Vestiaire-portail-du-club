@@ -423,6 +423,15 @@
   .info-card h3 { font-family: 'Karla'; font-weight: 700; font-size: 14px; letter-spacing: 0; margin-bottom: 4px; }
   .info-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
 
+  .venue-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .venue-card {
+    background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
+    padding: 16px 18px; display: flex; gap: 12px; box-shadow: var(--shadow);
+  }
+  .venue-card svg { width: 20px; height: 20px; color: var(--gold); flex: none; margin-top: 2px; }
+  .venue-card h3 { font-family: 'Karla'; font-weight: 700; font-size: 14px; margin: 0 0 4px; }
+  .venue-card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; }
+
   .bureau-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
   .bureau-list li { background: var(--panel); border: 1px solid var(--panel-line); border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
   .bureau-list .role { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-deep); margin-bottom: 2px; }
@@ -451,6 +460,7 @@
     <button class="pill" data-nav="pronostics">Pronostics</button>
     <button class="pill" data-nav="braderie">Braderie</button>
     <button class="pill" data-nav="sponsors">Sponsors</button>
+    <button class="pill" data-nav="gymnases">Gymnases</button>
     <button class="pill" data-nav="contact">Infos pratiques</button>
   </nav>
 </div>
@@ -505,6 +515,13 @@
         <div class="tile-title">Sponsors</div>
         <p class="tile-desc">Les partenaires qui soutiennent le club.</p>
         <span class="tile-go">Voir les sponsors &rarr;</span>
+      </button>
+
+      <button class="tile" data-nav="gymnases">
+        <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div class="tile-title">Gymnases</div>
+        <p class="tile-desc">Les adresses des salles o&ugrave; jouent nos &eacute;quipes.</p>
+        <span class="tile-go">Voir les gymnases &rarr;</span>
       </button>
 
       <button class="tile" data-nav="contact">
@@ -662,6 +679,46 @@
     </div>
   </section>
 
+  <!-- GYMNASES -->
+  <section class="view" id="view-gymnases" hidden>
+    <div class="section-head">
+      <h2>Gymnases</h2>
+      <button class="back-link" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5 8 12l7 7"/></svg>Accueil</button>
+    </div>
+    <p class="lede">Les salles o&ugrave; se d&eacute;roulent les entra&icirc;nements et matchs du club.</p>
+
+    <div class="venue-grid">
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Gymnase Nicole Hassler</h3><p>Sente de l&rsquo;&eacute;cole<br>78370 Plaisir</p></div>
+      </div>
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Palais des sports Pierre de Coubertin</h3><p>10 Av. de Geesthacht<br>78370 Plaisir</p></div>
+      </div>
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Complexe sportif du Jeu de Paume</h3><p>13 Av. du Grand Canal<br>78450 Villepreux</p></div>
+      </div>
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Gymnase Alain Mimoun</h3><p>Av. du G&eacute;n&eacute;ral de Gaulle<br>78450 Villepreux</p></div>
+      </div>
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Gymnase Jean Guimier</h3><p>14 Rue Pablo Neruda<br>78340 Les Clayes-sous-Bois</p></div>
+      </div>
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Centre sportif Thierry Gilardi</h3><p>Ruelle Mathieu<br>78340 Les Clayes-sous-Bois</p></div>
+      </div>
+      <div class="venue-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        <div><h3>Gymnase Dorine Bourneton</h3><p>2 Pass. Anne Frank<br>78340 Les Clayes-sous-Bois</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="view" id="view-contact" hidden>
     <div class="section-head">
@@ -674,10 +731,6 @@
       <div class="info-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
         <div><h3>Adresse</h3><p>PLCHB &mdash; Plaisir Les Clayes Handball<br>Mairie de Plaisir<br>2, rue de la R&eacute;publique<br>78370 Plaisir</p></div>
-      </div>
-      <div class="info-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-        <div><h3>Gymnases</h3><p>Gymnase Nicole Hassler<br>Sente de l&rsquo;&eacute;cole<br>78370 Plaisir</p><p style="margin-top:8px">Palais des sports Pierre de Coubertin<br>10 Av. de Geesthacht<br>78370 Plaisir</p><p style="margin-top:8px">Complexe sportif du Jeu de Paume<br>13 Av. du Grand Canal<br>78450 Villepreux</p><p style="margin-top:8px">Gymnase Alain Mimoun<br>Av. du G&eacute;n&eacute;ral de Gaulle<br>78450 Villepreux</p><p style="margin-top:8px">Gymnase Jean Guimier<br>14 Rue Pablo Neruda<br>78340 Les Clayes-sous-Bois</p><p style="margin-top:8px">Centre sportif Thierry Gilardi<br>Ruelle Mathieu<br>78340 Les Clayes-sous-Bois</p><p style="margin-top:8px">Gymnase Dorine Bourneton<br>2 Pass. Anne Frank<br>78340 Les Clayes-sous-Bois</p></div>
       </div>
       <div class="info-card">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.6 22 2 14.4 2 7a2 2 0 0 1 2-2Z"/></svg>
@@ -720,7 +773,7 @@
 
 <script>
   (function () {
-    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'braderie', 'sponsors', 'contact'];
+    var views = ['home', 'buvette', 'entrainements', 'boutique', 'pronostics', 'braderie', 'sponsors', 'gymnases', 'contact'];
 
     function shuffleSponsors() {
       var grid = document.querySelector('.sponsor-grid');
