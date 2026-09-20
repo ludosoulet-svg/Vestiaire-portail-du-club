@@ -314,9 +314,11 @@
   .promo-overlay.open { display: flex; }
   .promo-card {
     background: var(--panel); border: 1px solid var(--gold); border-radius: 14px;
-    padding: 30px 24px 24px; max-width: 320px; width: 100%; text-align: center;
+    padding: 16px 16px 20px; max-width: 340px; width: 100%; text-align: center;
     position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    max-height: 88vh; overflow-y: auto;
   }
+  .promo-img { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 14px; }
   .promo-close {
     position: absolute; top: 8px; right: 12px; background: none; border: none;
     font-size: 26px; line-height: 1; color: var(--ink-faint); cursor: pointer;
@@ -877,13 +879,8 @@
 <div class="promo-overlay" id="promoOverlay" onclick="closePromo()">
   <div class="promo-card" onclick="event.stopPropagation()">
     <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
-    <div class="promo-badge">-15%</div>
-    <h3>Offre boutique du club</h3>
-    <p>Profite de &minus;15% sur la boutique HelloAsso du PLCHB avec le code&nbsp;:</p>
-    <div class="promo-code" id="promoCode" onclick="copyPromoCode()">PLCHB26</div>
-    <p class="promo-hint" id="promoCopyHint">Touche le code pour le copier</p>
-    <p class="promo-expiry">Offre valable jusqu&rsquo;au 20 septembre.</p>
-    <button class="promo-cta" onclick="goToBoutiqueFromPromo()">Voir la boutique</button>
+    <img src="promo-sweats-hummel.jpg" alt="PLCHB Pronostic &mdash; trois sweats Hummel &agrave; gagner, challenge pronostics du week-end du 26 et 27 septembre" class="promo-img">
+    <button class="promo-cta" onclick="goToPronosticsFromPromo()">Voir les pronostics</button>
   </div>
 </div>
 
@@ -944,29 +941,14 @@
     document.getElementById('promoOverlay').classList.remove('open');
     try { sessionStorage.setItem('plchb-promo-seen', '1'); } catch (e) {}
   }
-  function copyPromoCode() {
-    var code = 'PLCHB26';
-    var hint = document.getElementById('promoCopyHint');
-    function done() {
-      if (hint) {
-        hint.textContent = 'Code copi\u00e9 !';
-        setTimeout(function () { hint.textContent = 'Touche le code pour le copier'; }, 2000);
-      }
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(code).then(done).catch(done);
-    } else {
-      done();
-    }
-  }
-  function goToBoutiqueFromPromo() {
+  function goToPronosticsFromPromo() {
     closePromo();
-    var t = document.querySelector('[data-nav="boutique"]');
+    var t = document.querySelector('[data-nav="pronostics"]');
     if (t) t.click();
   }
 
   (function () {
-    var promoDeadline = new Date('2026-09-20T23:59:59');
+    var promoDeadline = new Date('2026-09-27T18:00:00');
     if (new Date() > promoDeadline) return;
     var seen = false;
     try { seen = sessionStorage.getItem('plchb-promo-seen') === '1'; } catch (e) {}
