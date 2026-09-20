@@ -877,7 +877,17 @@
 </div>
 
 <div class="promo-overlay" id="promoOverlay" onclick="closePromo()">
-  <div class="promo-card" onclick="event.stopPropagation()">
+  <div class="promo-card" id="promoCardBoutique" onclick="event.stopPropagation()">
+    <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
+    <div class="promo-badge">-15%</div>
+    <h3>Offre boutique du club</h3>
+    <p>Profite de &minus;15% sur la boutique HelloAsso du PLCHB avec le code&nbsp;:</p>
+    <div class="promo-code" id="promoCode" onclick="copyPromoCode()">PLCHB26</div>
+    <p class="promo-hint" id="promoCopyHint">Touche le code pour le copier</p>
+    <p class="promo-expiry">Offre valable jusqu&rsquo;au 20 septembre.</p>
+    <button class="promo-cta" onclick="goToBoutiqueFromPromo()">Voir la boutique</button>
+  </div>
+  <div class="promo-card" id="promoCardPronostics" onclick="event.stopPropagation()">
     <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
     <img src="promo-sweats-hummel.jpg" alt="PLCHB Pronostic &mdash; trois sweats Hummel &agrave; gagner, challenge pronostics du week-end du 26 et 27 septembre" class="promo-img">
     <button class="promo-cta" onclick="goToPronosticsFromPromo()">Voir les pronostics</button>
@@ -941,6 +951,26 @@
     document.getElementById('promoOverlay').classList.remove('open');
     try { sessionStorage.setItem('plchb-promo-seen', '1'); } catch (e) {}
   }
+  function copyPromoCode() {
+    var code = 'PLCHB26';
+    var hint = document.getElementById('promoCopyHint');
+    function done() {
+      if (hint) {
+        hint.textContent = 'Code copi\u00e9 !';
+        setTimeout(function () { hint.textContent = 'Touche le code pour le copier'; }, 2000);
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(done).catch(done);
+    } else {
+      done();
+    }
+  }
+  function goToBoutiqueFromPromo() {
+    closePromo();
+    var t = document.querySelector('[data-nav="boutique"]');
+    if (t) t.click();
+  }
   function goToPronosticsFromPromo() {
     closePromo();
     var t = document.querySelector('[data-nav="pronostics"]');
@@ -948,13 +978,24 @@
   }
 
   (function () {
-    var promoStart = new Date('2026-09-21T05:00:00');
-    var promoDeadline = new Date('2026-09-27T18:00:00');
     var now = new Date();
-    if (now < promoStart || now > promoDeadline) return;
+    var campaigns = [
+      { id: 'promoCardBoutique', start: null, end: new Date('2026-09-20T23:59:59') },
+      { id: 'promoCardPronostics', start: new Date('2026-09-21T05:00:00'), end: new Date('2026-09-27T18:00:00') }
+    ];
+    var active = null;
+    for (var i = 0; i < campaigns.length; i++) {
+      var c = campaigns[i];
+      if ((!c.start || now >= c.start) && now <= c.end) { active = c; break; }
+    }
+    if (!active) return;
     var seen = false;
     try { seen = sessionStorage.getItem('plchb-promo-seen') === '1'; } catch (e) {}
     if (seen) return;
+    campaigns.forEach(function (c) {
+      var el = document.getElementById(c.id);
+      if (el) el.style.display = (c.id === active.id) ? '' : 'none';
+    });
     setTimeout(function () {
       var overlay = document.getElementById('promoOverlay');
       if (overlay) overlay.classList.add('open');
