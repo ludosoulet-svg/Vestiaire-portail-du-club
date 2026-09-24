@@ -941,6 +941,8 @@
       document.querySelectorAll('.pill').forEach(function (p) {
         p.setAttribute('aria-current', p.dataset.nav === name ? 'true' : 'false');
       });
+      var pillbar = document.getElementById('pillbar');
+      if (pillbar) pillbar.hidden = (name !== 'home');
       if (name === 'sponsors') shuffleSponsors();
       window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
       try { localStorage.setItem('vestiaire-last-view', name); } catch (e) {}
