@@ -323,18 +323,6 @@
     position: absolute; top: 8px; right: 12px; background: none; border: none;
     font-size: 26px; line-height: 1; color: var(--ink-faint); cursor: pointer;
   }
-  .promo-badge {
-    display: inline-block; background: var(--gold); color: var(--gold-ink);
-    font-weight: 800; font-size: 22px; padding: 6px 18px; border-radius: 999px; margin-bottom: 12px;
-  }
-  .promo-card h3 { margin: 0 0 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; letter-spacing: 0.02em; color: var(--ink); }
-  .promo-card p { margin: 0 0 10px; font-size: 13.5px; color: var(--ink-faint); }
-  .promo-code {
-    font-family: 'IBM Plex Mono', monospace; font-size: 22px; letter-spacing: 0.1em;
-    background: var(--navy-deep); color: var(--gold); border: 1px dashed var(--gold);
-    border-radius: 8px; padding: 10px; cursor: pointer; margin-bottom: 4px; user-select: all;
-  }
-  .promo-expiry { font-size: 12px; margin-top: 10px; }
   .promo-cta {
     margin-top: 14px; width: 100%; padding: 12px; border-radius: 999px; border: none;
     background: var(--blue-btn); color: #fff; font-weight: 700; cursor: pointer; font-size: 14px;
@@ -900,16 +888,6 @@
 </div>
 
 <div class="promo-overlay" id="promoOverlay" onclick="closePromo()">
-  <div class="promo-card" id="promoCardBoutique" onclick="event.stopPropagation()">
-    <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
-    <div class="promo-badge">-15%</div>
-    <h3>Offre boutique du club</h3>
-    <p>Profite de &minus;15% sur la boutique HelloAsso du PLCHB avec le code&nbsp;:</p>
-    <div class="promo-code" id="promoCode" onclick="copyPromoCode()">PLCHB26</div>
-    <p class="promo-hint" id="promoCopyHint">Touche le code pour le copier</p>
-    <p class="promo-expiry">Offre valable jusqu&rsquo;au 20 septembre.</p>
-    <button class="promo-cta" onclick="goToBoutiqueFromPromo()">Voir la boutique</button>
-  </div>
   <div class="promo-card" id="promoCardPronostics" onclick="event.stopPropagation()">
     <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
     <img src="promo-sweats-hummel.jpg" alt="PLCHB Pronostic &mdash; trois sweats Hummel &agrave; gagner, challenge pronostics du week-end du 26 et 27 septembre" class="promo-img">
@@ -976,26 +954,6 @@
     document.getElementById('promoOverlay').classList.remove('open');
     try { sessionStorage.setItem('plchb-promo-seen', '1'); } catch (e) {}
   }
-  function copyPromoCode() {
-    var code = 'PLCHB26';
-    var hint = document.getElementById('promoCopyHint');
-    function done() {
-      if (hint) {
-        hint.textContent = 'Code copi\u00e9 !';
-        setTimeout(function () { hint.textContent = 'Touche le code pour le copier'; }, 2000);
-      }
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(code).then(done).catch(done);
-    } else {
-      done();
-    }
-  }
-  function goToBoutiqueFromPromo() {
-    closePromo();
-    var t = document.querySelector('[data-nav="boutique"]');
-    if (t) t.click();
-  }
   function goToPronosticsFromPromo() {
     closePromo();
     var t = document.querySelector('[data-nav="pronostics"]');
@@ -1005,7 +963,6 @@
   (function () {
     var now = new Date();
     var campaigns = [
-      { id: 'promoCardBoutique', start: null, end: new Date('2026-09-20T23:59:59') },
       { id: 'promoCardPronostics', start: new Date('2026-09-21T05:00:00'), end: new Date('2026-09-27T18:00:00') }
     ];
     var active = null;
