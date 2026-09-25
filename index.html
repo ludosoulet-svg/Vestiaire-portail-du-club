@@ -163,8 +163,8 @@
 
   .tiles {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
   }
 
   .tile {
@@ -173,13 +173,13 @@
     background: var(--panel);
     border: 1px solid var(--panel-line);
     border-radius: 10px;
-    padding: 22px 20px 20px;
+    padding: 16px 14px 14px;
     cursor: pointer;
     box-shadow: var(--shadow);
     transition: transform 0.15s ease, border-color 0.15s ease;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
   }
 
   .tile::before {
@@ -195,15 +195,15 @@
   .tile:hover { transform: translateY(-3px); border-color: var(--gold); }
 
   .tile-icon {
-    width: 30px; height: 30px;
+    width: 24px; height: 24px;
     color: var(--gold);
   }
 
-  .tile-title { font-size: 24px; text-transform: uppercase; }
-  .tile-desc { color: var(--ink-soft); font-size: 14px; line-height: 1.5; margin: 0; }
+  .tile-title { font-size: 18px; text-transform: uppercase; }
+  .tile-desc { color: var(--ink-soft); font-size: 12.5px; line-height: 1.45; margin: 0; }
   .tile-go {
     margin-top: auto;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
