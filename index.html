@@ -897,6 +897,10 @@
     <img src="promo-sweats-hummel.jpg" alt="PLCHB Pronostic &mdash; trois sweats Hummel &agrave; gagner, challenge pronostics du week-end du 26 et 27 septembre" class="promo-img">
     <button class="promo-cta" onclick="goToPronosticsFromPromo()">Voir les pronostics</button>
   </div>
+  <div class="promo-card" id="promoCardOctobreRose" onclick="event.stopPropagation()">
+    <button class="promo-close" onclick="closePromo()" aria-label="Fermer">&times;</button>
+    <img src="promo-octobre-rose.png" alt="PLCHB se mobilise pour Octobre Rose" class="promo-img">
+  </div>
 </div>
 
 <script>
@@ -967,7 +971,8 @@
   (function () {
     var now = new Date();
     var campaigns = [
-      { id: 'promoCardPronostics', start: new Date('2026-09-21T05:00:00'), end: new Date('2026-09-27T18:00:00') }
+      { id: 'promoCardPronostics', start: new Date('2026-09-21T05:00:00'), end: new Date('2026-09-27T18:00:00') },
+      { id: 'promoCardOctobreRose', start: new Date('2026-10-01T00:00:00'), end: new Date('2026-10-31T23:59:59') }
     ];
     var active = null;
     for (var i = 0; i < campaigns.length; i++) {
