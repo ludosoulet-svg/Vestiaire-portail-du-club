@@ -450,6 +450,25 @@
   .match-vs { font-family: 'Karla'; font-size: 12px; color: var(--ink-faint); font-weight: 400; }
   .match-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; font-size: 13px; color: var(--ink-soft); }
 
+  .matchlist-group { margin-bottom: 22px; }
+  .matchlist-group h3 {
+    font-family: 'Karla'; font-weight: 700; font-size: 14px; color: var(--gold);
+    margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .matchlist-group .grp-sub { font-size: 12px; color: var(--ink-faint); margin: 0 0 10px; }
+  .matchlist-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 9px 12px; background: var(--panel); border: 1px solid var(--panel-line);
+    border-radius: 8px; margin-bottom: 6px; font-size: 13px;
+  }
+  .matchlist-row .cat {
+    font-weight: 700; color: var(--gold-deep); font-size: 11px; text-transform: uppercase;
+    background: var(--navy-deep); border-radius: 5px; padding: 3px 7px; flex: none;
+  }
+  .matchlist-row .opp { flex: 1 1 auto; min-width: 140px; }
+  .matchlist-row .opp b { color: var(--ink); }
+  .matchlist-row .meta { font-size: 11.5px; color: var(--ink-faint); flex: none; text-align: right; }
+
   .social-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
   .social-card {
     background: var(--panel); border: 1px solid var(--panel-line); border-radius: 10px;
@@ -876,10 +895,38 @@
     </div>
     <p class="lede">Les rencontres &agrave; ne pas manquer ce week-end.</p>
 
-    <div class="planning-wrap">
-      <img class="planning-img" src="match-weekend-26-27sept.jpg" alt="Matchs &agrave; domicile et &agrave; l&rsquo;ext&eacute;rieur du week-end du 26-27 septembre" onclick="openLightbox(this.src)">
+    <div class="matchlist-group">
+      <h3>Samedi 3 octobre &mdash; Domicile</h3>
+      <p class="grp-sub">Gymnase Nicole Hassler, Plaisir</p>
+      <div class="matchlist-row"><span class="cat">U13F (2)</span><span class="opp">PLCHB <b>vs</b> Saint Quentin Est</span><span class="meta">15h30</span></div>
+      <div class="matchlist-row"><span class="cat">U13M (1)</span><span class="opp">PLCHB <b>vs</b> AS Poissy HB</span><span class="meta">17h00</span></div>
+      <div class="matchlist-row"><span class="cat">SM (1)</span><span class="opp">PLCHB <b>vs</b> Ent. Plesseenne HB</span><span class="meta">19h00</span></div>
+      <div class="matchlist-row"><span class="cat">SF</span><span class="opp">PLCHB <b>vs</b> HB St-Leu / Taverny</span><span class="meta">21h00</span></div>
     </div>
-    <p class="planning-hint">Touche l&rsquo;image pour l&rsquo;agrandir.</p>
+
+    <div class="matchlist-group">
+      <h3>Samedi 3 octobre &mdash; Ext&eacute;rieur</h3>
+      <div class="matchlist-row"><span class="cat">U13F (1)</span><span class="opp">CLOC Ach&egrave;res <b>vs</b> PLCHB</span><span class="meta">14h00 &middot; Gymnase Pierre de Coubertin, Ach&egrave;res</span></div>
+      <div class="matchlist-row"><span class="cat">U18M (1)</span><span class="opp">Ent. Rueil / Puteaux <b>vs</b> PLCHB</span><span class="meta">17h45 &middot; Gymnase des Pavillons, Rueil-Malmaison</span></div>
+      <div class="matchlist-row"><span class="cat">U18M (2)</span><span class="opp">Sud Yvelines HB <b>vs</b> PLCHB</span><span class="meta">18h00 &middot; Complexe sportif, Le Perray-en-Yvelines</span></div>
+    </div>
+
+    <div class="matchlist-group">
+      <h3>Dimanche 4 octobre &mdash; Domicile</h3>
+      <p class="grp-sub">Gymnase Nicole Hassler, Plaisir</p>
+      <div class="matchlist-row"><span class="cat">U15M</span><span class="opp">PLCHB <b>vs</b> HB Bois d&rsquo;Arcy</span><span class="meta">14h00</span></div>
+      <div class="matchlist-row"><span class="cat">SM (2)</span><span class="opp">PLCHB <b>vs</b> AS Mantaise</span><span class="meta">16h00</span></div>
+    </div>
+
+    <div class="matchlist-group">
+      <h3>Dimanche 4 octobre &mdash; Ext&eacute;rieur</h3>
+      <div class="matchlist-row"><span class="cat">U11F</span><span class="opp">St-Cyr / Fontenay <b>vs</b> PLCHB</span><span class="meta">10h00 &middot; Palais des Sports, Elancourt</span></div>
+      <div class="matchlist-row"><span class="cat">U11F</span><span class="opp">EMHB <b>vs</b> PLCHB</span><span class="meta">10h00 &middot; Palais des Sports, Elancourt</span></div>
+      <div class="matchlist-row"><span class="cat">U11F</span><span class="opp">Le Chesnay / Vers. <b>vs</b> PLCHB</span><span class="meta">10h00 &middot; Palais des Sports, Elancourt</span></div>
+      <div class="matchlist-row"><span class="cat">U18F</span><span class="opp">Villiers EC HB <b>vs</b> PLCHB</span><span class="meta">10h00 &middot; Gymnase Abel Rospide, Villiers-sur-Marne</span></div>
+      <div class="matchlist-row"><span class="cat">SM (3)</span><span class="opp">TS Vicinois 88 HB <b>vs</b> PLCHB</span><span class="meta">11h30 &middot; Gymnase des Pyramides, Voisins-le-Bretonneux</span></div>
+      <div class="matchlist-row"><span class="cat">U13M (2)</span><span class="opp">St-Cyr / Fontenay <b>vs</b> PLCHB</span><span class="meta">14h00 &middot; Gymnase Descartes, Fontenay-le-Fleury</span></div>
+    </div>
   </section>
 
 </main>
